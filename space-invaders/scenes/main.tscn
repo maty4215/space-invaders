@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0g2kw2h2ln6x"]
+
+[ext_resource type="PackedScene" uid="uid://bk7s5fdgutwn1" path="res://scenes/player.tscn" id="1_nbyfl"]
+[ext_resource type="PackedScene" uid="uid://w3238yqa2jko" path="res://scenes/enemy_spawner.tscn" id="2_1auhh"]
+
+[sub_resource type="GDScript" id="GDScript_3wapl"]
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfrac"]
+size = Vector2(22, 645)
+
+[node name="Main" type="Node"]
+script = SubResource("GDScript_3wapl")
+
+[node name="Player" parent="." instance=ExtResource("1_nbyfl")]
+position = Vector2(0, 323)
+scale = Vector2(0.26, 0.26)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2.00002, -1.52588e-05)
+scale = Vector2(1e-05, 1e-05)
+
+[node name="enemySpawner" parent="." instance=ExtResource("2_1auhh")]
+
+[node name="walls" type="Node" parent="."]
+
+[node name="RightWall" type="Area2D" parent="walls"]
+position = Vector2(578, 0)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/RightWall"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_bfrac")
+
+[node name="LeftWall" type="Area2D" parent="walls"]
+position = Vector2(1156, 0)
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="walls/LeftWall"]
+position = Vector2(-1730, 0)
+shape = SubResource("RectangleShape2D_bfrac")
+
+[connection signal="area_entered" from="walls/RightWall" to="enemySpawner" method="_on_right_wall_area_entered"]
+[connection signal="area_entered" from="walls/LeftWall" to="enemySpawner" method="_on_left_wall_area_entered"]
