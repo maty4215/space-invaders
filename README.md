@@ -13,7 +13,8 @@ Tento projekt je kopie klasické hry Space Invaders. Projekt je napsán v herní
 - Bunkery
 - Skóre
 
-![Video](https://imgur.com/a/uXiC6mf)
+
+![Video](https://github.com/user-attachments/assets/ff5d3a0a-4aa4-45e3-8f5c-4b29c3ec3896)
 
 
 ![Home_screen](https://github.com/user-attachments/assets/00716955-d074-41bd-8ddb-4d4b6270ec29)
